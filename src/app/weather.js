@@ -15,7 +15,7 @@ export class Weather{
 
     }
 
-    changeLocation(city = 'Puerto Ordaz', countryCode = 've') {
+    changeLocation(city, countryCode) {
         this.city = city
         this.countryCode = countryCode
     }

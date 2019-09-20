@@ -1,13 +1,20 @@
 require('./index.css') // importar css.
 const {Weather} = require('./weather')
 const {UI} = require('./UI')
+const {Store} = require('./store')
 
 const ui = new UI()
-const weather = new Weather('Puerto Ordaz', 've')
+const store = new Store()
+const { city,countryCode } = store.getLocationData()
+const weather = new Weather(city, countryCode)
 
 ui.btnChange.addEventListener('click', e =>{
-    if(ui.city.value !== '' && ui.countryCode.value !== ''){
-        weather.changeLocation(ui.city.value, ui.countryCode.value)
+    const city = ui.city.value 
+    const countryCode = ui.countryCode.value
+
+    if(city !== '' && countryCode !== ''){
+        weather.changeLocation(city, countryCode)
+        store.setLocationData(city,countryCode)
         fetchWeather()
     }
     e.preventDefault()
